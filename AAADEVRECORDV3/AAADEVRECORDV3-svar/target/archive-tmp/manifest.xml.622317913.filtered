@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service_description xmlns="http://archiveschemas.aus.avaya.com/aus"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://archiveschemas.aus.avaya.com/aus aus.xsd"
+    name="AAADEVRECORDV3" version="1.0.0.0.0"
+    sdk_version="3.4" sdk_build="3.4.0.0.340003">
+	<component type="properties" filename="properties.xml" />
+	<component type="servlet" filename="AAADEVRECORDV3-ear-1.0.0.0.0.ear" />
+	<!-- Please remove this if you do not have an EULA associated to your snap-in -->
+	<component type="eula" filename="eula.txt" />
+</service_description>

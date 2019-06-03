@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://archiveschemas.aus.avaya.com/properties" xmlns="http://archiveschemas.aus.avaya.com/properties"
+	elementFormDefault="qualified">
+	<xs:element name="service">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="smgr" type="smgr_type" />
+				<xs:element name="log_space" type="xs:string" minOccurs="0"
+					maxOccurs="1" />
+				<xs:element name="service_mgmt_viewable" type="xs:boolean" default="true"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="load_as_bundle_view" type="xs:boolean" default="false"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="event_listener_class" type="xs:string"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="call_listener_class" type="xs:string"
+					minOccurs="0" maxOccurs="1" />
+				<xs:element name="user_store" minOccurs="0" type="user_store_type" />
+				<xs:element name="esc" maxOccurs="unbounded" minOccurs="0"
+					type="esc_type" />
+				<xs:element name="imgateway" maxOccurs="1" minOccurs="0"
+					type="imgateway_type" />
+				<xs:element name="cutthrough_url" maxOccurs="unbounded"
+					minOccurs="0" type="cutthrough_url_type" />
+                <xs:element name="pu_data" type="pu_details_type" 
+                                                minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="custom_logger" type="custom_logger_parent_type" 
+                                                minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required" />
+			<xs:attribute name="version" type="xs:string" use="required" />
+			<xs:attribute name="application" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="esc_type">
+		<xs:all>
+			<xs:element name="description" minOccurs="0" type="xs:string" />
+			<xs:element name="event_package" minOccurs="1" type="xs:string" />
+			<xs:element name="wildcard_comparison" minOccurs="1"
+				type="xs:boolean" />
+			<xs:element name="minimal_platform_processing" minOccurs="1"
+				type="xs:boolean" />
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="imgateway_type">
+		<xs:all>
+			<xs:element name="description" minOccurs="0" type="xs:string" />
+			<xs:element name="minimal_platform_processing" minOccurs="1"
+				type="xs:boolean" />
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="cutthrough_url_type">
+		<xs:all>
+			<xs:element name="url_display_name" minOccurs="1" type="xs:string" />
+			<xs:element name="url" minOccurs="1" type="xs:string" />
+			<xs:element name="typeName" minOccurs="0" type="xs:string" />
+			<xs:element name="permission" minOccurs="0" type="xs:string" />
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="pu_details_type">
+		<xs:sequence>
+			<xs:element name="puName" maxOccurs="1" type="xs:string" />
+			<xs:element name="redirect_uri_data" type="redirect_type" 
+									minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="log_space" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="description" minOccurs="0" maxOccurs="1" type="xs:string" />
+		</xs:sequence>
+    </xs:complexType>
+	<xs:complexType name="redirect_type">
+		<xs:sequence>
+			<xs:element name="port" maxOccurs="1" type="xs:int" />
+			<xs:element name="locationContext" maxOccurs="1" type="xs:string" />
+			<xs:element name="redirectContext" maxOccurs="1" type="xs:string" /> 
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="smgr_type">
+		<xs:sequence>
+			<xs:element name="description" minOccurs="0" type="xs:string" />
+			<xs:element name="admin_visible" minOccurs="0" type="xs:boolean" />
+			<xs:element name="service_profile_visible" minOccurs="0"
+				type="xs:boolean" />
+			<xs:element name="orig_order" minOccurs="0" type="xs:int" />
+			<xs:element name="orig_group" minOccurs="0" type="xs:int" />
+			<xs:element name="term_order" minOccurs="0" type="xs:int" />
+			<xs:element name="term_group" minOccurs="0" type="xs:int" />
+			<xs:element name="fs_component" minOccurs="0" type="xs:boolean" />
+			<xs:element name="up_component" minOccurs="0" type="xs:boolean" />
+			<xs:element name="min_fs_version" minOccurs="0" type="xs:string" />
+			<xs:element name="min_up_version" minOccurs="0" type="xs:string" />
+			<xs:element name="feature_tags" minOccurs="0" type="feature_tags" />
+			<xs:element name="message" minOccurs="0" type="message" />
+			<xs:element name="database" minOccurs="0" type="database" />
+			<xs:element name="life-cycle" type="life-cycle" maxOccurs="1"
+				minOccurs="0"></xs:element>
+			<xs:element name="attribute" type="attribute_metadata"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="service_ports" type="service_ports"
+				minOccurs="0" maxOccurs="1" />
+			<xs:element name="attribute_group" type="attribute_group"
+				minOccurs="0" maxOccurs="1" />
+			<xs:element name="resource_server" type="resource_server"
+				minOccurs="0" maxOccurs="1" />
+			<xs:element name="dependencies" minOccurs="0" maxOccurs="1"
+				type="dependenciesType" />
+			<xs:element name="attribute_overrides" minOccurs="0" type="attribute_overrides" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="feature_tags">
+		<xs:sequence>
+			<xs:element name="feature_tag" maxOccurs="unbounded" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="message">
+		<xs:sequence>
+			<xs:element name="channel" maxOccurs="unbounded" type="channel" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="channel">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="type">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ptop-single" />
+						<xs:enumeration value="pubsub-multi" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="listener-class" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="database">
+		<xs:sequence>
+			<xs:element name="instance" maxOccurs="unbounded" type="instance" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="instance">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="container-mgmt-name" minOccurs="0"
+				type="xs:string" />
+			<xs:element name="non-transactional" minOccurs="0"
+				type="xs:boolean" />
+			<xs:element name="max-conns" minOccurs="0"
+				type="xs:positiveInteger" />
+			<xs:element name="multi-threaded-access" minOccurs="0"
+				type="xs:boolean" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="schema-major" minOccurs="0" type="xs:int" />
+			<xs:element name="schema-minor" minOccurs="0" type="xs:int" />
+			<xs:element name="schema-revision" minOccurs="0" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="service_ports">
+		<xs:sequence>
+			<xs:element name="port" minOccurs="0" maxOccurs="unbounded"
+				type="port" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="port">
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="default_port" type="xs:positiveInteger"
+			use="required" />
+		<xs:attribute name="description" type="xs:string" use="optional" />
+		<xs:attribute name="protocol" type="xs:string" use="optional" />
+	</xs:complexType>
+
+	<xs:complexType name="user_store_type">
+		<xs:sequence>
+			<xs:element name="metadata" type="userstore_metadata"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="node" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="validation_type">
+		<xs:sequence>
+			<xs:element name="minimum" minOccurs="0" type="xs:string" />
+			<xs:element name="maximum" minOccurs="0" type="xs:string" />
+			<xs:element name="type">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="STRING" />
+						<xs:enumeration value="ENCRYPTED_STRING" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<!-- pattern is not supported, please do not use -->
+			<xs:element name="pattern" minOccurs="0" type="xs:string" />
+			<!-- enum is not supported, please do not use -->
+			<xs:element name="enum" type="enum_set" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="attribute_group">
+		<xs:sequence>
+			<xs:element name="group_name" minOccurs="0" type="xs:string" />
+			<xs:element name="group_order" minOccurs="0" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="attribute_value">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="value" type="xs:string" />
+				<xs:element name="table_value" maxOccurs="unbounded">
+					<xs:complexType mixed="true">
+						<xs:attribute name="row" type="xs:int" use="required" />
+						<xs:attribute name="column" type="xs:int" use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="user_changeable" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="attribute_metadata">
+		<xs:sequence>
+			<xs:element name="displayName" type="xs:string" />
+			<xs:element name="onChangeAlertMsg" minOccurs="0" type="xs:string" />
+			<xs:element name="helpInfo" minOccurs="0" type="xs:string" />
+			<!-- global is not supported, please do not use -->
+			<xs:element name="global" minOccurs="0" type="xs:boolean" />
+			<xs:element name="attr_order" minOccurs="0" type="xs:int" />
+			<xs:element name="scope" minOccurs="0" type="xs:string" />
+			<xs:element name="type" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="STRING" />
+						<xs:enumeration value="INTEGER" />
+						<xs:enumeration value="RANGE" />
+						<xs:enumeration value="BOOLEAN" />
+						<xs:enumeration value="CHOICE" />
+						<xs:enumeration value="LIST" />
+						<xs:enumeration value="CLUSTER" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="valueChoices" minOccurs="0" type="xs:string" />
+			<xs:element name="encrypted" minOccurs="0" type="xs:boolean" />
+			<xs:choice>
+				<xs:element name="validation" type="validation_type" />
+				<!-- the table element is not supported, please do not use -->
+				<xs:element name="table" type="table_type" />
+			</xs:choice>
+			<xs:element name="group" type="attribute_group" minOccurs="0"
+				maxOccurs="1" />
+			<xs:element name="portlet_changeable" minOccurs="0"
+				type="xs:boolean" />
+			<xs:element name="admin_visible" minOccurs="0" type="xs:boolean" />
+			<xs:element name="admin_changeable" minOccurs="0" type="xs:boolean" />
+			<xs:element name="factory" type="attribute_value"
+				minOccurs="0" />
+			<xs:element name="overwrite_factory_default" minOccurs="0"
+				type="xs:boolean" />
+			<xs:element name="attribute_override" type="override_attribute"
+				minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	<!-- table-type is not supported, please do not use -->
+	<xs:complexType name="table_type">
+		<xs:sequence>
+			<xs:element name="max_rows" minOccurs="0" type="xs:int" />
+			<xs:element name="column" type="column_type" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="column_type">
+		<xs:sequence>
+			<xs:element name="validation" type="validation_type" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="number" type="xs:int" use="required" />
+	</xs:complexType>
+	<!-- enum_set is not supported, please do not use -->
+	<xs:complexType name="enum_set">
+		<xs:sequence>
+			<xs:element name="member" maxOccurs="unbounded" type="xs:string" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="userstore_metadata">
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="data_type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="string" />
+					<xs:enumeration value="integer" />
+					<xs:enumeration value="double" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="string_regex" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="life-cycle">
+		<xs:sequence>
+			<xs:element name="life-cycle-notification" maxOccurs="unbounded"
+				type="life-cycle-notification"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="life-cycle-notification">
+		<xs:all>
+			<xs:element name="uri" type="xs:string"></xs:element>
+			<xs:element name="timeout-secs" type="xs:int" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+			<xs:element name="port" type="xs:int" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+		</xs:all>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	<!-- authorization resource_server -->
+	<xs:complexType name="resource_server">
+		<xs:sequence>
+			<xs:element name="displayName" minOccurs="1" maxOccurs="1"
+				type="xs:string" />
+			<xs:element name="shortName" minOccurs="1" maxOccurs="1"
+				type="xs:string" />
+			<xs:element name="feature" type="feature" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="feature">
+		<xs:sequence>
+			<xs:element name="name" minOccurs="1" maxOccurs="1"
+				type="xs:string" />
+			<xs:element name="value" minOccurs="1" maxOccurs="1"
+				type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="dependenciesType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="dependency" type="dependencyType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="dependencyType">
+		<xs:sequence>
+			<xs:element name="name">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="CLUSTER_DB" />
+						<xs:enumeration value="DATAGRID" />
+						<xs:enumeration value="RELIABLE_EVENTING" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="actions" type="actionsType" />
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="actionsType">
+		<xs:all>
+			<xs:element name="install-time-action" minOccurs="0"
+				maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ADMIN_WARNING" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="run-time-action" minOccurs="0"
+				maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="STOP" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="startup-time-action" minOccurs="0"
+				maxOccurs="1">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="DONT_START" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="attribute_overrides">
+		<xs:sequence>
+			<xs:element name="attribute_override" maxOccurs="unbounded" type="attribute_override" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="attribute_override">
+		<xs:sequence>
+			<xs:element name="factory_override" type="attribute_metadata" maxOccurs="1" />
+			<xs:element name="override_snapin_attribute" maxOccurs="unbounded" 
+				type="override_snapin_attribute" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="override_snapin_attribute">
+		<xs:sequence>
+			<xs:element name="snapin_name" type="xs:string" />
+			<xs:element name="attribute_name" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="override_attribute">
+		<xs:sequence>
+			<xs:element name="cluster_or_snapin" type="xs:string" default="CLUSTER"/>
+			<xs:element name="attribute_name" type="xs:string" />
+			<xs:element name="transform" type="transform" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="transform">
+    	<xs:sequence>
+        	<xs:element name="from" type="xs:string" />
+        	<xs:element name="to" type="xs:string" />
+    	</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="custom_logger_parent_type">
+    	<xs:all>
+        	<xs:element name="was" type="custom_was_logger_type" 
+                                               minOccurs="0" maxOccurs="1"/>
+        	<xs:element name="gs" type="custom_gs_logger_type" 
+                                               minOccurs="0" maxOccurs="1"/>
+    	</xs:all>
+	</xs:complexType>
+	<xs:complexType name="custom_was_logger_type">
+	    <xs:all>	
+    		<xs:element name="loggers" type="custom_loggers_type" 
+                                               minOccurs="0" maxOccurs="1"/>
+    	</xs:all>
+	</xs:complexType>
+	<xs:complexType name="custom_gs_logger_type">
+    	<xs:all>	
+    		<xs:element name="loggers" type="custom_loggers_type" 
+                                               minOccurs="0" maxOccurs="1"/>
+    	</xs:all>
+	</xs:complexType>
+	<xs:complexType name="custom_loggers_type">
+	    <xs:sequence>	
+    		<xs:element name="logger" type="custom_logger_type" 
+                                               minOccurs="0" maxOccurs="unbounded"/>
+    	</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="custom_logger_type">
+    	<xs:all>
+        	<xs:element name="name" maxOccurs="1" type="xs:string" />
+        	<xs:element name="pattern" maxOccurs="1" type="xs:string" />
+        	<xs:element name="log_file_path" maxOccurs="1" type="xs:string" />
+        	<xs:element name="log_space" minOccurs="0" maxOccurs="1" type="xs:string" />
+    	</xs:all>
+	</xs:complexType>
+</xs:schema>

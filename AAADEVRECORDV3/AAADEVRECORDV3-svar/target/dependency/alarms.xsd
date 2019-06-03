@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://archiveschemas.aus.avaya.com/snapinalarms"
+	xmlns="http://archiveschemas.aus.avaya.com/snapinalarms"
+	xmlns:p="http://archiveschemas.aus.avaya.com/snapinalarms"
+	elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>
+			The schema defines the format for the Avaya Breeze Snap-In
+			alarm definition XML files.
+			This file is provided by the snap-in
+			developer to define all the alarms that are generated for the
+			snap-in.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:element name="alarms" type="alarmListType">
+		<xs:key name="eventCodeKey">
+			<xs:selector xpath="./p:alarm" />
+			<xs:field xpath="p:eventcode" />
+		</xs:key>
+		<xs:unique name="notificationOidKey">
+			<xs:selector xpath="./p:alarm" />
+			<xs:field xpath="p:notificationOid" />
+		</xs:unique>
+		<xs:unique name="clearNotificationOidKey">
+			<xs:selector xpath="./p:alarm" />
+			<xs:field xpath="p:clearNotificationOid" />
+		</xs:unique>
+	</xs:element>
+
+	<xs:element name="alarm" type="alarmType"></xs:element>
+
+	<xs:element name="eventcode" type="eventCode">
+		<xs:annotation>
+			<xs:documentation>
+				The Event Code is logged by snap-in developer using
+				snap-in logger to
+				generate this alarm.
+				All event codes defined in the
+				XML
+				should be unique for that file.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+
+	<xs:element name="alarmDisplayText" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>
+				This is description/info about the alarm that is
+				displayed on System Manager alarming UI page.
+				In case if you want to
+				define it at runtime, mention $1 and while logging provide display
+				text as an argument to the logger.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="severity" type="severities" default="normal">
+		<xs:annotation>
+			<xs:documentation>
+				This field specified the severity of the alarm.
+				Select appropriately one of the below severity for the alarm :
+				minor, major, warning, normal, major or critical.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="notificationOid" type="ObjectIdentifier">
+		<xs:annotation>
+			<xs:documentation>
+				The SNMP Notification OID is the unique identifier
+				for a
+				trap/alarm. Among others it means that each notificationOID is
+				associated with a single format string (in trapd.conf). Alarms
+				usually
+				have two notification OID - one for setting the alarm and one
+				for resolving
+				the alarm (defined in two rules).
+				Note: according the
+				Avaya's internal standard for implementing ALARM-MIB, every
+				alarm
+				type must have a unique notification OID.
+				This is optional field but
+				if you are defining it, make sure its uniquely defined under the
+				product.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="alarmListType">
+		<xs:sequence>
+			<xs:element ref="organization" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element ref="alarm" maxOccurs="50" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="alarmType">
+		<xs:sequence>
+			<xs:element ref="eventcode" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element ref="alarmDisplayText" maxOccurs="1"
+				minOccurs="1"></xs:element>
+			<xs:element ref="severity" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element ref="notificationOid" maxOccurs="1" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The SNMP Notification OID is the unique
+						identifier for a trap/alarm.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="clearFlag" maxOccurs="1" minOccurs="1"></xs:element>
+			<xs:element ref="clearNotificationOid" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element ref="clearFlagForCluster" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element ref="clearNotificationOidForCluster" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:simpleType name="severities">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="minor"></xs:enumeration>
+			<xs:enumeration value="warning"></xs:enumeration>
+			<xs:enumeration value="normal"></xs:enumeration>
+			<xs:enumeration value="major"></xs:enumeration>
+			<xs:enumeration value="critical"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="clearFlag" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>
+				If this flag is set to true, an additional event
+				code
+				will be automatically generated for clearing this alarm.
+				If this
+				alarm has event code EVENT_CODE_4, the generated event ID will be
+				CLR_EVENT_CODE_4.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="clearNotificationOid" type="ObjectIdentifier">
+		<xs:annotation>
+			<xs:documentation>
+				Alarms usually have two notification OID - one for setting the alarm and one
+				for resolving the alarm (defined in two rules).
+				Provide clear notification oid if notification oid is provided and clearFlag
+				is set to true.
+				Note: according the
+				Avaya's internal standard for implementing ALARM-MIB, every
+				alarm type must have a unique notification OID.				.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="clearFlagForCluster" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>
+				If this flag is set to true, an additional event
+				code
+				will be automatically generated for clearing this alarm at cluster level.
+				If this
+				alarm has event code EVENT_CODE_4, the generated event ID will be
+				NSM_EVENT_CODE_4.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="clearNotificationOidForCluster" type="ObjectIdentifier">
+		<xs:annotation>
+			<xs:documentation>
+				Alarms usually have two notification OID - one for setting the alarm and one
+				for resolving the alarm (defined in two rules).
+				Provide clear notification oid for cluster if notification oid is provided and clearFlagForCluster
+				is set to true.
+				Note: according the
+				Avaya's internal standard for implementing ALARM-MIB, every
+				alarm type must have a unique notification OID.				.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:simpleType name="eventCode">		
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"></xs:minLength>
+			<xs:maxLength value="12"></xs:maxLength>
+			<xs:pattern value="[a-zA-Z0-9_]*"/>						
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ObjectIdentifier">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[.]1[.]([0-9]+[.])+([0-9]+)"/>			                   
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="organization" type="orgType"></xs:element>
+
+	<xs:complexType name="orgType">
+		<xs:sequence>
+			<xs:element ref="enterpriseToProductId" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						SNMP Notification OID contains the enterprise id
+						and product id for a trap/alarm. Provide here id starting from
+						enterprise to product id.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="enterpriseToProductIdentifier" maxOccurs="1"
+				minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						SNMP Notification OID contains the enterprise id
+						and product id for a trap/alarm. Provide here identifiers for id
+						starting from enterprise to product id.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="enterpriseToProductId" type="ProductIdentifier">
+		<xs:annotation>
+			<xs:documentation>
+				The SNMP Notification OID is the unique identifier
+				for a trap/alarm. SNMP Notification OID contains the enterprise id
+				and product id for a trap/alarm. Provide here id starting from
+				enterprise to product id.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="enterpriseToProductIdentifier" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>
+				SNMP Notification OID contains the enterprise id
+				and product id for a trap/alarm. Provide here identifiers for id
+				starting from enterprise to product id.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="ProductIdentifier">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]+([.][0-9]+)*"/>	
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

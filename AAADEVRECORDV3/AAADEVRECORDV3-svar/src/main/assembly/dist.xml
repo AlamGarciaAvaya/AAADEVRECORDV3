@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+	<id>svar</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<!-- Uncomment the following section if you want to install trusted certs(.crt or .pem format) to WebSphere using
+	your snap-in. Note that the snap-in must be Avaya Signed snap-in i.e either internal Avaya Snap-in
+	or Snapp-store certified snap-in.
+	Please create a directory under resources directory called "certs". Also, look at pom.xml of your svar to make 
+	corresponding changes which will enable this feature. -->
+	<!-- <fileSets>
+		<fileSet>
+			<directory>src/main/resources/certs</directory>
+			<outputDirectory>/certs/</outputDirectory>
+			<filtered>false</filtered>
+		</fileSet>
+	</fileSets> -->
+	<files>
+		<file>
+			<source>src/main/resources/manifest.xml</source>
+			<outputDirectory>/</outputDirectory>
+			<filtered>true</filtered>
+		</file>
+		<file>
+			<source>src/main/resources/properties.xml</source>
+			<outputDirectory>/</outputDirectory>
+			<filtered>true</filtered>
+			<lineEnding>unix</lineEnding>
+		</file>
+		<file>
+			<source>src/main/resources/alarms.xml</source>
+			<outputDirectory>/</outputDirectory>
+			<filtered>true</filtered>
+		</file>
+		<file>
+			<source>src/main/resources/eula.txt</source>
+			<outputDirectory>/</outputDirectory>
+			<filtered>true</filtered>
+		</file>
+	</files>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<baseDirectory>/</baseDirectory>
+	<dependencySets>
+		<dependencySet>
+			<outputDirectory>/</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+</assembly>

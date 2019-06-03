@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service xmlns="http://archiveschemas.aus.avaya.com/properties"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://archiveschemas.aus.avaya.com/properties properties.xsd"
+	name="AAADEVRECORDV3" version="1.0.0.0.0" application="AAADEVRECORDV3-1.0.0.0.0">
+	<smgr>
+		<description>My Service</description>
+		<term_order>1</term_order>
+		<term_group>1</term_group>
+		<fs_component>true</fs_component>
+		<attribute name="idioma">
+			<displayName>Idioma</displayName>
+			<helpInfo>Idiomas disponibles: es , en , pt</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>es</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="agentPhone">
+			<displayName>Agente</displayName>
+			<helpInfo>Agente Final</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>2302</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="email">
+			<displayName>Correo Electrónico</displayName>
+			<helpInfo>Seleccionar el correo electrónico</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>umansilla@avaya.com</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="NLUUserName">
+			<displayName>Natural Languaje Understanding User Name</displayName>
+			<helpInfo>Usuario proporcionado por IBM WATSON</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>4329540b-99da-44f8-b5a4-2457c17c2ed3</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="NLUPassword">
+			<displayName>Natural Languaje Understanding Contraseña</displayName>
+			<helpInfo>Contraseña proporcionada por IBM WATSON</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>zhpZkWeqIdT6</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="NLUCurrentVersion">
+			<displayName>Natural Languaje Understanding Versión actual
+			</displayName>
+			<helpInfo>Versión actual EndPoint proporcionada por IBM WATSON
+			</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>2018-03-16</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="WAUserName">
+			<displayName>Watson Assistant Usuario</displayName>
+			<helpInfo>Usuario proporcionado por IBM WATSON</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>b194dca5-f290-4af5-826a-de71217db50a</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="WAWorkSpaceId">
+			<displayName>Watson Assistant Work Space Id</displayName>
+			<helpInfo>Work Space Id IBM WATSON Assistant</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>c415c64c-64d6-43d3-92f7-cc3be92f2b55</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="WAPassword">
+			<displayName>Watson Assistant Work Contraseña</displayName>
+			<helpInfo>Contraseña proporcionada por IBM WATSON Assistant
+			</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>ZIrFXSd1exPG</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="WACurrentVersion">
+			<displayName>Watson Assistant Versión Actual</displayName>
+			<helpInfo>Versión actual proporcionada IBM WATSON Assistant
+			</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>2018-07-10</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="ltapikey">
+			<displayName>Language Translator API Key</displayName>
+			<helpInfo>Key Proporcionada por IBM Watson</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>kVrAnsbYI64uK5oJvjDCYwftGECOUgLDYTJbPc7sbsJX</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="GoogleCloudSpeechToText">
+			<displayName>Google Cloud Speech To Text API Key</displayName>
+			<helpInfo>Key Proporcionada por Google Cloud Speech to Text
+			</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>AIzaSyAb8txQ6r49Cj67Bq4sJi9QE_k1CJusVYU</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="endPoint">
+			<displayName>Liga que se muestra en el email</displayName>
+			<helpInfo>Liga que se muestra en el email</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>http://breeze2-132.collaboratory.avaya.com/services/AAADEVCONTROLPAD/ControladorGrabaciones
+				</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="GooglePost">
+			<displayName>GooglePost</displayName>
+			<helpInfo>GooglePost</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>devavaya.ddns.net:8080</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+		<attribute name="emailFrom">
+			<displayName>emailFrom</displayName>
+			<helpInfo>Select who sends the mail depending on the laboratory
+			</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>lab132@collaboratory.avaya.com</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+				<attribute name="scorevoicerecognition">
+			<displayName>scoreVoiceRecognition</displayName>
+			<helpInfo>El valor mínimo que debe de cumplir para confirmar reconocimiento de voz
+			</helpInfo>
+			<global>false</global>
+			<validation name="AnyString">
+				<type>STRING</type>
+			</validation>
+			<portlet_changeable>false</portlet_changeable>
+			<admin_visible>true</admin_visible>
+			<admin_changeable>true</admin_changeable>
+			<factory>
+				<value>20.00</value>
+				<user_changeable>true</user_changeable>
+			</factory>
+		</attribute>
+
+	</smgr>
+	<!-- <log_space>10MB</log_space> -->
+</service>

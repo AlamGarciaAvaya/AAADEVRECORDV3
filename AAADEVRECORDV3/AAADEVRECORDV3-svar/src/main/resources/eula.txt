@@ -1,0 +1,13 @@
+This is only a test of the end user license agreement (EULA) mechanism.  
+This is NOT an EULA.
+If this were a real EULA you would be instructed to read and accept 
+the terms prior to installation and/or download. 
+Place your EULA in the eula.txt file inside the bundle or snap-in and  
+enable your EULA with the following entry in the manifest.xml file 
+(also inside the bundle or snap-in):
+<component type="eula" filename="eula.txt" />
+
+Before publishing your snap-in, consult with your legal counsel to ensure 
+you have an enforceable EULA presentation and acceptance mechanism.
+This ends the test of the (EULA) mechanism.  
+Click "Accept" to continue.

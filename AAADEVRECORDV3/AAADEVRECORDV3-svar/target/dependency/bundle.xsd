@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://archiveschemas.aus.avaya.com/bundle"
+	xmlns="http://archiveschemas.aus.avaya.com/bundle" xmlns:p="http://archiveschemas.aus.avaya.com/bundle"
+
+	elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>
+			The schema defines the format for the Avaya Breeze
+			Snap-In bundle definition XML files.
+			This file is provided by the
+			snap-in 
+			developer to define all the snap-in(s) within bundle.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:element name="bundle" type="bundleType" />
+
+	<xs:complexType name="bundleType">
+		<xs:sequence>
+			<xs:element ref="services" maxOccurs="1" minOccurs="1"></xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="bundleCommonAttr"></xs:attributeGroup>
+	</xs:complexType>
+
+	<xs:element name="services">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="service" maxOccurs="unbounded" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="service">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="dependsOn" maxOccurs="unbounded" minOccurs="0">
+					<xs:complexType>
+						<xs:attributeGroup ref="bundleCommonAttr"></xs:attributeGroup>												
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref="bundleCommonAttr"></xs:attributeGroup>
+			<xs:attribute name="svarFileName" type="xs:string" use="required"/>			
+		</xs:complexType>
+	</xs:element>
+
+	<xs:attributeGroup name="bundleCommonAttr">
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="version" type="xs:string" use="required" />
+	</xs:attributeGroup>
+</xs:schema>

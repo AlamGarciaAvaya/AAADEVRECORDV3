@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<!-- This file is needed for a call based application.Refer HelloWorld Sample 
+	service for more clarifications. 
+	
+	If the application you are writing is HTTP only, remove this file. 
+	You can refer DynamicTeamFormation Sample service in SDK for help -->
+<sip-app id="SipApp_ID">
+
+	<app-name>${serviceName}-${serviceVersion}
+	</app-name>
+	<display-name>${serviceName}-${serviceVersion}
+	</display-name>
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+	<proxy-config>
+		<proxy-timeout>10800</proxy-timeout>
+	</proxy-config>
+
+	<servlet>
+		<description></description>
+		<display-name>CfSipServlet</display-name>
+		<servlet-name>CfSipServlet</servlet-name>
+		<servlet-class>com.avaya.collaboration.call.servlet.CfSipServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-selection>
+		<main-servlet>CfSipServlet</main-servlet>
+	</servlet-selection>
+
+	<listener>
+		<listener-class>com.avaya.service.ipt.invite_connection.listener.SipApplicationSessionListenerHandler
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>com.avaya.service.ipt.util.locking.AsynchronousEventUtils
+		</listener-class>
+	</listener>
+</sip-app>

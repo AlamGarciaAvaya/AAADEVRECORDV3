@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>AAADEVRECORDV3-1.0.0.0.0</display-name>
+  <servlet>
+    <display-name>CfSipServlet</display-name>
+    <servlet-name>CfSipServlet</servlet-name>
+    <servlet-class>com.avaya.collaboration.call.servlet.CfSipServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CfSipServlet</servlet-name>
+    <url-pattern>/CfSipServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Verify</display-name>
+    <servlet-name>Verify</servlet-name>
+    <servlet-class>AAADEVRECORDV3.servlets.verbio.Verify</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Verify</servlet-name>
+    <url-pattern>/Verify</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddFile</display-name>
+    <servlet-name>AddFile</servlet-name>
+    <servlet-class>AAADEVRECORDV3.servlets.verbio.AddFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddFile</servlet-name>
+    <url-pattern>/AddFile</url-pattern>
+  </servlet-mapping>
+</web-app>

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: bambooagent
+Build-Jdk: 1.8.0_144
+CE-SDK-Release: 3.4.0.0.340003
+CE-SDK-Version: 3.4
+
