@@ -113,8 +113,9 @@ public class LogIn extends HttpServlet {
                 String fecha = jobj.getJSONObject(i).has("fecha")?jobj.getJSONObject(i).getString("fecha"):"";
                 String phone = jobj.getJSONObject(i).has("phone")?jobj.getJSONObject(i).getString("phone"):"";
                 String train = jobj.getJSONObject(i).has("train")?jobj.getJSONObject(i).getString("train"):"";
+                String country = jobj.getJSONObject(i).has("country") ? jobj.getJSONObject(i).getString("country") : "";
 
-                Usuario user = new Usuario(jobj.getJSONObject(i).getInt("id"), name, verbiouser, userName, fecha, hora, phone, train);
+                Usuario user = new Usuario(jobj.getJSONObject(i).getInt("id"), name, verbiouser, userName, fecha, hora, phone, train, country);
                 HttpSession userSession = (HttpSession) request.getSession();
                 userSession.setMaxInactiveInterval(15 * 60);
                 userSession.setAttribute("userActive", user);

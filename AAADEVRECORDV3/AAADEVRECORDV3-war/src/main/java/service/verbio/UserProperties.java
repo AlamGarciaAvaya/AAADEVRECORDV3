@@ -72,7 +72,12 @@ public class UserProperties extends HttpServlet {
                 json.put("hour", user.getHora());
                 json.put("phone_active", user.getPhone());
                 json.put("verbio_train", user.getTrain());
-
+                json.put("country", user.getCountry());
+                
+                if(user.getUsername().equals("umansilla@avaya.com") || user.getUsername().equals("jlramirez@breeze.com")){
+                    json.put("admin", "admin");
+                }
+                
                 out.println(json);
 
             }

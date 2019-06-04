@@ -31,7 +31,7 @@ public class Usuario {
         this.username = username;
     }    
 
-    public Usuario(int id, String name, String verbiouser, String username, String fecha, String hora, String phone, String train) {
+    public Usuario(int id, String name, String verbiouser, String username, String fecha, String hora, String phone, String train, String country) {
         this.id = id;
         this.name = name;
         this.verbiouser = verbiouser;
@@ -40,10 +40,8 @@ public class Usuario {
         this.hora = hora;
         this.phone = phone;
         this.train = train;
-    }
-
-
-    
+        this.country = country;
+    }   
     
     public int getId() {
         return id;

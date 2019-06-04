@@ -51,6 +51,10 @@ function userProp() {
             var properties = JSON.parse(this.responseText);
             console.log(properties);
             propertiesGlobal = properties;
+            if(properties.admin === "admin"){
+                document.getElementById('verbioDisplay').style.display = "block";
+                document.getElementById('ibmDisplay').style.display = "block";
+            }            
             if (properties.real_name !== "") {
                 document.getElementById('welcome').innerHTML = "Welcome " + properties.real_name;
                 document.getElementById('realName').innerHTML = properties.real_name;
@@ -65,6 +69,11 @@ function userProp() {
             } else {
                 document.getElementById('fecha').innerHTML = "No Date Set";
             }
+            if(properties.country !== ""){
+                document.getElementById('countryProfile').innerHTML = properties.country;
+            }else{
+                document.getElementById('countryProfile').innerHTML = "No Country Set";
+            }
             if (properties.verbio_user !== "") {
                 document.getElementById('verbioUser').innerHTML = properties.verbio_user;
                 document.getElementById('createVerbioBtn').style.display = "none";
@@ -77,9 +86,10 @@ function userProp() {
             }
             if (properties.phone_active !== "") {
                 document.getElementById('verbioPhone').innerHTML = properties.phone_active;
-
+                document.getElementById('phoneProfile').innerHTML = properties.phone_active;
             } else {
                 document.getElementById('verbioPhone').innerHTML = "No Phone Set";
+                document.getElementById('phoneProfile').innerHTML = "No Phone Set";
             }
 
             verbioUserInfo();
@@ -387,6 +397,16 @@ document.getElementById('btnLogger').addEventListener('click', function (e) {
 
 document.getElementById('btnVantage').addEventListener('click', function (e) {
     var sitio = "https://devavaya.ddns.net/websockets";
+    window.open(sitio);
+});
+
+document.getElementById('btnVerbiosOficial').addEventListener('click', function (e) {
+    var sitio = "https://avaya:DRNUDUsWh5o3uRdQcZ@cloud2.verbio.com/asv/users.php";
+    window.open(sitio);
+});
+
+document.getElementById('btnIBMOfficial').addEventListener('click', function (e) {
+    var sitio = "https://cloud.ibm.com/services/conversation/5be4eadc-9423-4d7b-a429-aaf5b06cd924?env_id=us-south";
     window.open(sitio);
 });
 
