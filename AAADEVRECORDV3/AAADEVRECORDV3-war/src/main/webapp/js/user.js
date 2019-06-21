@@ -54,13 +54,16 @@ function userProp() {
             if(properties.admin === "admin"){
                 document.getElementById('verbioDisplay').style.display = "block";
                 document.getElementById('ibmDisplay').style.display = "block";
+                document.getElementById('controlsWF').style.display = "block";
             }            
             if (properties.real_name !== "") {
                 document.getElementById('welcome').innerHTML = "Welcome " + properties.real_name;
                 document.getElementById('realName').innerHTML = properties.real_name;
 
             } else {
-                document.getElementById('welcome').innerHTML = "Welcome";
+                var user = properties.user;
+                var split = user.split("@");
+                document.getElementById('welcome').innerHTML = "Welcome " + split[0];
                 document.getElementById('realName').innerHTML = "No Name Set";
             }
 
@@ -410,6 +413,20 @@ document.getElementById('btnIBMOfficial').addEventListener('click', function (e)
     window.open(sitio);
 });
 
+document.getElementById('controlsWF').addEventListener('click', function(e){
+	createWindowClock("Control.html", 490, 115);
+    function createWindowClock(src, width, height) {
+        var win = window.open(src, "_new", "width=" + width + ",height=" + height + "menubar=no,location=no,scrollbars=no,status=no");
+        win.resizeTo(650, 156);
+        win.addEventListener("resize", function () {
+            console.log("Resized");
+            console.log(width);
+            console.log(height);
+            win.resizeTo(650, 156);
+        });
+    }
+});
+
 function getAudios() {
     var data = null;
 
@@ -420,6 +437,7 @@ function getAudios() {
         if (this.readyState === 4) {
 
             var resultAudioRecordings = JSON.parse(this.responseText);
+            console.log(resultAudioRecordings);
             if (resultAudioRecordings.status === "empty") {
 
             } else {

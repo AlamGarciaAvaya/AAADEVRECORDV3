@@ -24,6 +24,8 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.avaya.collaboration.util.logger.Logger;
+
 import service.verbio.bean.Usuario;
 import service.verbio.util.Arrays;
 
@@ -35,10 +37,11 @@ import service.verbio.util.Arrays;
 public class Audios extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	private final Logger logger = Logger.getLogger(getClass());
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+		logger.info("Audios");
         JSONObject json = new JSONObject();
         PrintWriter out = response.getWriter();
         setAccessControlHeaders(response);
@@ -49,11 +52,14 @@ public class Audios extends HttpServlet {
         HttpSession session = request.getSession(true);
         Usuario user = (Usuario) session.getAttribute("userActive");
         JSONObject jsonArrays = Arrays.main("home/wsuser/web/VerbioAudios/");
+        logger.info(jsonArrays);
         JSONArray jsonArrayObj = new JSONArray();
         int counter = 0;
         for (int i = 0; i < jsonArrays.length(); i++) {
             String nameFile = jsonArrays.getString("Index" + i);
-            String limitNameFile = nameFile.substring(0, 14);
+            String[] arrOfStr = nameFile.split("_user");
+            String limitNameFile = arrOfStr[0] + "_user";
+            logger.info(user.getVerbiouser());
             if (limitNameFile.equals(user.getVerbiouser())) {
                 JSONObject jsonAudioFile = new JSONObject();
                 File file = new File("home/wsuser/web/VerbioAudios/" + nameFile);
