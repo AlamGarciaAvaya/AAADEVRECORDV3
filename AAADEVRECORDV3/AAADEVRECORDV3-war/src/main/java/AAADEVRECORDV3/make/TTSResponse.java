@@ -31,6 +31,8 @@ import org.apache.http.impl.client.HttpClients;
 
 import service.AAADEVRECORDV3.MediaListenerTTSAnnouncement;
 
+import com.avaya.collaboration.businessdata.api.NoAttributeFoundException;
+import com.avaya.collaboration.businessdata.api.ServiceNotFoundException;
 import com.avaya.collaboration.call.Call;
 import com.avaya.collaboration.call.Participant;
 import com.avaya.collaboration.call.media.MediaFactory;
@@ -43,7 +45,9 @@ import com.avaya.collaboration.ssl.util.SSLUtilityFactory;
 import com.avaya.collaboration.util.logger.Logger;
 import com.avaya.zephyr.platform.dal.api.ServiceUtil;
 
+import AAADEVRECORDV3.util.AttributeStore;
 import AAADEVRECORDV3.util.BuscarYRemplazarAcentos;
+import AAADEVRECORDV3.util.Constants;
 import AAADEVRECORDV3.util.LanguageAttribute;
 import AAADEVRECORDV3.util.TrafficInterfaceAddressRetrieverImpl;
 
@@ -80,15 +84,15 @@ public class TTSResponse {
 		
 		try {
 			TTSWatsonGenerateAudioFile(announcement, voice, call);
-		} catch (SSLUtilityException | IOException e) {
+		} catch (SSLUtilityException | IOException | NoAttributeFoundException | ServiceNotFoundException e) {
 			logger.info("TTSWatsonGenerateAudioFile Error: " + e.toString());
 		}
 		
 	}
 	
-	public void TTSWatsonGenerateAudioFile(String announcement, String voice, Call call) throws SSLUtilityException, ClientProtocolException, IOException{
-		String user = "1a750c00-9343-4032-9e4d-dd485052692d";
-		String password = "g7rmue4UsCWP";
+	public void TTSWatsonGenerateAudioFile(String announcement, String voice, Call call) throws SSLUtilityException, ClientProtocolException, IOException, NoAttributeFoundException, ServiceNotFoundException{
+		String user = AttributeStore.INSTANCE.getAttributeValue(Constants.TTS_USER_NAME);
+		String password = AttributeStore.INSTANCE.getAttributeValue(Constants.TTS_PASSWORD);
 		final SSLProtocolType protocolTypeTraductor = SSLProtocolType.TLSv1_2;
 		final SSLContext sslContextTraductor = SSLUtilityFactory
 				.createSSLContext(protocolTypeTraductor);

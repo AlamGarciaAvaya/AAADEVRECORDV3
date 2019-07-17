@@ -4,12 +4,20 @@
  * and open the template in the editor.
  */
 package service.verbio.bean;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author umansilla
  */
 public class Usuario {
+
     private int id;
     private String name;
     private String verbiouser;
@@ -20,16 +28,18 @@ public class Usuario {
     private String phone;
     private String train;
     private String country;
-
-
-
+    /////////////////////////////////////////////
+    private String cuenta;
+    private String saldo;
+    private ArrayList<String> historicoList;
+    ////////////////////////////////////////////
     public Usuario() {
     }
 
     public Usuario(int id, String username) {
         this.id = id;
         this.username = username;
-    }    
+    }
 
     public Usuario(int id, String name, String verbiouser, String username, String fecha, String hora, String phone, String train, String country) {
         this.id = id;
@@ -41,8 +51,26 @@ public class Usuario {
         this.phone = phone;
         this.train = train;
         this.country = country;
-    }   
+    }
+
+    //CREADO EL 10 DE JULIO 2019
+    public Usuario(int id, String name, String verbiouser, String username, String fecha, String hora, String phone, String train, String country, String cuenta, ArrayList<String> historicoList, String saldo) {
+        this.id = id;
+        this.name = name;
+        this.verbiouser = verbiouser;
+        this.username = username;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.phone = phone;
+        this.train = train;
+        this.country = country;
+        this.cuenta = cuenta;
+        this.historicoList = historicoList;
+        this.saldo = saldo;
+    }
+    ///////////////////////////////////////////
     
+
     public int getId() {
         return id;
     }
@@ -114,13 +142,36 @@ public class Usuario {
     public void setTrain(String train) {
         this.train = train;
     }
-    
-        public String getCountry() {
+
+    public String getCountry() {
         return country;
     }
 
     public void setCountry(String country) {
         this.country = country;
     }
-    
+/////////////////////////////////////////////////
+    public String getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(String cuenta) {
+        this.cuenta = cuenta;
+    }
+
+    public List<String> getHistóricoList() {
+        return historicoList;
+    }
+
+    public void setHistóricoList(ArrayList<String> históricoList) {
+        this.historicoList = históricoList;
+    }
+    public String getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(String saldo) {
+        this.saldo = saldo;
+    }
+    /////////////////////////////////////////////////
 }

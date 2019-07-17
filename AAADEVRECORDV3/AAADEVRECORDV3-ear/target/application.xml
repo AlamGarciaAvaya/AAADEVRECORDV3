@@ -4,7 +4,7 @@
   <module>
     <web>
       <web-uri>AAADEVRECORDV3-war-1.0.0.0.0.war</web-uri>
-      <context-root>AAADEVRECORDV3-1.0.0.0.0</context-root>
+      <context-root>AAADEVRECORDV3-1.1.0.0.0</context-root>
     </web>
   </module>
   <library-directory>lib</library-directory>

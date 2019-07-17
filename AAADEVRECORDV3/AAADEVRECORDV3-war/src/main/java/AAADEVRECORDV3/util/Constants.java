@@ -20,4 +20,6 @@ public class Constants {
 	public static final String EMAIL_FROM = "emailFrom";
 	public static final String EMAIL_USE = "endPoint";
 	public static final String SCORE_VOICE_RECOGNITION = "scorevoicerecognition";
+	public static final String TTS_USER_NAME = "ttsWatsonUserName";
+	public static final String TTS_PASSWORD = "ttsWatsonPassword";
 }

@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package service.verbio;
 
 import java.io.BufferedReader;
@@ -14,7 +19,9 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.DigestException;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,13 +51,12 @@ import service.verbio.bean.Usuario;
 @MultipartConfig
 @WebServlet(name = "LogIn", urlPatterns = {"/LogIn"})
 public class LogIn extends HttpServlet {
-	private final Logger logger = Logger.getLogger(getClass());
-
 	private static final long serialVersionUID = 1L;
-
-	@Override
+	private final Logger logger = Logger.getLogger(getClass());
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        logger.info("GET");
         PrintWriter out = response.getWriter();
         JSONObject json = new JSONObject();
 
@@ -74,7 +80,7 @@ public class LogIn extends HttpServlet {
         JSONObject json = new JSONObject();
         Part emailPart = request.getPart("Email");
         String emailString = getStringValue(emailPart);
-
+        logger.info(emailString);
         Part pass = request.getPart("Pass");
         String passString = getStringValue(pass);
         response.setContentType("application/json");
@@ -85,9 +91,11 @@ public class LogIn extends HttpServlet {
             if (validateUserAndPass(emailString, decryptText(passString, "secret"), request)) {
                 response.setStatus(200);
                 json.put("status", "ok");
+                logger.info("True");
                 out.println(json);
             } else {
                 response.setStatus(400);
+                logger.info("False");
                 json.put("status", "false");
                 out.println(json);
             }
@@ -101,24 +109,45 @@ public class LogIn extends HttpServlet {
 
     public Boolean validateUserAndPass(String email, String password, HttpServletRequest request) {
 //        String jsonData = readFile("home/wsuser/web/LogIn/Access.txt");
+        logger.info("validateUserAndPass");
+
         String jsonData = readFile("home/wsuser/web/LogIn/Access.txt");
+        logger.info(jsonData);
         JSONArray jobj = new JSONArray(jsonData);
+        logger.info("JSONArray");
+        logger.info(jobj);
         for (int i = 0; i < jobj.length(); i++) {
             String userName = jobj.getJSONObject(i).getString("username");
             String passwordFile = jobj.getJSONObject(i).getString("password");
             if (userName.equals(email) && password.equals(passwordFile)) {
-                String name = jobj.getJSONObject(i).has("name")?jobj.getJSONObject(i).getString("name"):"";
-                String verbiouser = jobj.getJSONObject(i).has("verbiouser")?jobj.getJSONObject(i).getString("verbiouser"):"";
-                String hora = jobj.getJSONObject(i).has("hora")?jobj.getJSONObject(i).getString("hora"):"";
-                String fecha = jobj.getJSONObject(i).has("fecha")?jobj.getJSONObject(i).getString("fecha"):"";
-                String phone = jobj.getJSONObject(i).has("phone")?jobj.getJSONObject(i).getString("phone"):"";
-                String train = jobj.getJSONObject(i).has("train")?jobj.getJSONObject(i).getString("train"):"";
+                String name = jobj.getJSONObject(i).has("name") ? jobj.getJSONObject(i).getString("name") : "";
+                String verbiouser = jobj.getJSONObject(i).has("verbiouser") ? jobj.getJSONObject(i).getString("verbiouser") : "";
+                String fecha = jobj.getJSONObject(i).has("fecha") ? jobj.getJSONObject(i).getString("fecha") : "";
+                String hora = jobj.getJSONObject(i).has("hora") ? jobj.getJSONObject(i).getString("hora") : "";
+                String phone = jobj.getJSONObject(i).has("phone") ? jobj.getJSONObject(i).getString("phone") : "";
+                String train = jobj.getJSONObject(i).has("train") ? jobj.getJSONObject(i).getString("train") : "";
                 String country = jobj.getJSONObject(i).has("country") ? jobj.getJSONObject(i).getString("country") : "";
-
-                Usuario user = new Usuario(jobj.getJSONObject(i).getInt("id"), name, verbiouser, userName, fecha, hora, phone, train, country);
+                //MODIFICADO EL 10 de Julio 2019
+                Boolean cajaSocialExists = jobj.getJSONObject(i).has("Caja_Social")?true:false;
+                String cuenta = "";
+                String saldo = "";
+                ArrayList<String> históricoList = null;
+                if(cajaSocialExists){
+                    JSONObject cajaSocial = jobj.getJSONObject(i).getJSONObject("Caja_Social");
+                    cuenta = cajaSocial.getString("Cuenta_Caja_Social");
+                    saldo = cajaSocial.getString("Saldo_Caja_Social");
+                    JSONArray cajaSocialArray = cajaSocial.getJSONArray("Historico_Caja_Social");
+                    históricoList = new ArrayList<String>();
+                    for (int j = 0; j <= cajaSocialArray.length() - 1; j++) {
+                        históricoList.add(cajaSocialArray.getString(j));
+                    }
+                }
+                
+                Usuario user = new Usuario(jobj.getJSONObject(i).getInt("id"), name, verbiouser, userName, fecha, hora, phone, train, country, cuenta, históricoList, saldo);
+                ////////////////////////////////////////////////////////////////
                 HttpSession userSession = (HttpSession) request.getSession();
-                userSession.setMaxInactiveInterval(15 * 60);
                 userSession.setAttribute("userActive", user);
+                userSession.setMaxInactiveInterval(15 * 60);
 
                 return true;
             } else {
