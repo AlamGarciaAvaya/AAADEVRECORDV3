@@ -8,7 +8,7 @@
 
   <properties>
 	  <serviceName>AAADEVRECORDV3</serviceName>
-	  <serviceVersion>1.1.0.0.0</serviceVersion>
+	  <serviceVersion>2.2.2.2.5</serviceVersion>
   </properties>
 
   <modules>

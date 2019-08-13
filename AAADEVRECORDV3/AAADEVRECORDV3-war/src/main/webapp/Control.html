@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS 4.0.0
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        -->
+        <!-- Use This for  -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <title>Control</title>
+        <style>
+
+            div.main{
+                background: #0264d6; /* Old browsers */
+                background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ */
+                background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#0264d6), color-stop(100%,#1c2b5a)); /* Chrome,Safari4+ */
+                background: -webkit-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Opera 12+ */
+                background: -ms-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* IE10+ */
+                background: radial-gradient(ellipse at center,  #cc0000 1%,#6d0000 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0264d6', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+                height:calc(100vh);
+                width:100%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container main">
+            <div class="row">
+                <div class="col-md-6 col-xs-12" style="top: 30px;">
+                    <img src="img/avaya-01-logo-black-and-white.png" alt="Avaya Image">
+                    <button id="startBtn" class="btn btn-success btn-lg">
+                        <span class="glyphicon glyphicon-ok-circle"></span> Start Event
+                    </button>
+                    <button id="endBtn" disabled="true" class="btn btn-danger btn-lg">
+                        <span class="glyphicon glyphicon-remove-circle"></span> Stop Event
+                    </button>
+                    <button id="izqBtn" type="button" disabled="true" class="btn btn-info btn-lg">&laquo;</button>
+                    <a style="color: white" id="textToogle"></a>
+                    <button id="derBtn" type="button" class="btn btn-info btn-lg">&raquo;</button>
+                </div>
+            </div>
+        </div>
+        <script>
+
+            var absolutepath = getAbsolutePath();
+            // Obtener el Dominio
+            function getAbsolutePath() {
+                var loc = window.location;
+                var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+                return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+            }
+            var workFlow = ["AAADEVAVAYABOTV3", "AAADEVZangSpaces"];
+            document.getElementById('textToogle').innerHTML = workFlow[0];
+            var contador = 1;
+            document.getElementById('startBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+                console.log("Start");
+                console.log(document.getElementById('endBtn').disabled);
+                console.log(document.getElementById('textToogle').text);
+                if (document.getElementById('textToogle').text === 'AAADEVAVAYABOTV3' && document.getElementById('endBtn').disabled === true) {
+                    startAvayaBot();
+
+                    document.getElementById('endBtn').disabled = '';
+                    document.getElementById('startBtn').disabled = 'true';
+                    document.getElementById('derBtn').disabled = 'true';
+                }
+                if (document.getElementById('textToogle').text === 'AAADEVZangSpaces' && document.getElementById('endBtn').disabled === true) {
+                    startZangSpaces();
+                }
+
+
+            });
+            document.getElementById('endBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+                console.log("End");
+                if (document.getElementById('textToogle').text === 'AAADEVAVAYABOTV3' && document.getElementById('startBtn').disabled === true) {
+                    stopAvayaBot();
+
+                    document.getElementById('startBtn').disabled = '';
+                    document.getElementById('derBtn').disabled = '';
+                    document.getElementById('endBtn').disabled = 'true';
+                    
+                }
+            });
+
+            document.getElementById('derBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+
+                if (contador < workFlow.length) {
+                    contador++;
+                    if (contador === workFlow.length) {
+                        document.getElementById('derBtn').disabled = 'true';
+                    }
+                }
+                if (contador > 0) {
+                    document.getElementById('izqBtn').disabled = '';
+                }
+                document.getElementById('textToogle').innerHTML = workFlow[contador - 1];
+            });
+            document.getElementById('izqBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+                if (contador <= workFlow.length) {
+                    contador--;
+                    document.getElementById('derBtn').disabled = '';
+                }
+
+                if (contador === 1) {
+                    document.getElementById('izqBtn').disabled = 'true';
+                }
+                document.getElementById('textToogle').innerHTML = workFlow[contador - 1];
+            });
+
+
+            function startAvayaBot() {
+                var data = new FormData();
+                data.append("family", "AAADEVAVAYABOTINI");
+                data.append("type", "AAADEVAVAYABOTINITYPE");
+                data.append("version", "1.0");
+                data.append("eventBody", "{}");
+
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        console.log(this.responseText);
+                    }
+                });
+
+                xhr.open("POST", "https://breeze2-132.collaboratory.avaya.com/services/EventingConnector/events");
+
+                xhr.send(data);
+            }
+
+            function stopAvayaBot() {
+                var data = new FormData();
+                data.append("family", "AAADEVAVAYABOTEND");
+                data.append("type", "AAADEVAVAYABOTENDTYPE");
+                data.append("version", "1.0");
+                data.append("eventBody", "{\"action\" : \"OFF\"}");
+
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        console.log(this.responseText);
+                    }
+                });
+
+                xhr.open("POST", "https://breeze2-132.collaboratory.avaya.com/services/EventingConnector/events");
+                xhr.send(data);
+            }
+
+            function startZangSpaces() {
+                var data = new FormData();
+                data.append("family", "AAADEVArroyConnectSuccess");
+                data.append("type", "AAADEVArroyConnectSuccessType");
+                data.append("version", "1.0");
+                data.append("eventBody", "{}");
+
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        console.log(this.responseText);
+                    }
+                });
+
+                xhr.open("POST", "https://breeze2-132.collaboratory.avaya.com/services/EventingConnector/events");
+                xhr.send(data);
+            }
+        </script>
+    </body>
+</html>

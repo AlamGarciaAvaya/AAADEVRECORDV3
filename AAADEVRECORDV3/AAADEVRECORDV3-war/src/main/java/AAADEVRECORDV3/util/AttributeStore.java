@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import service.AAADEVRECORDV3.MyEmailSender;
+
 import com.avaya.collaboration.businessdata.api.NoAttributeFoundException;
 import com.avaya.collaboration.businessdata.api.NoServiceProfileFoundException;
 import com.avaya.collaboration.businessdata.api.NoUserFoundException;
@@ -50,13 +52,18 @@ public enum AttributeStore
         return attributeValue;
     }
     
-    public String getServiceProfilesAttributeValue(final Participant participantCalled, final String attributeName) throws NoAttributeFoundException, ServiceNotFoundException, NoUserFoundException, NoServiceProfileFoundException
+    public String getServiceProfilesAttributeValue(final Participant participantCalled, final String attributeName)
     {
         String attributeValue = attributeMap.get(attributeName);
         if (StringUtils.isEmpty(attributeValue))
         {	
         	
-            attributeValue = serviceData.getServiceAttribute(participantCalled.getAddress(), attributeName);
+            try {
+				attributeValue = serviceData.getServiceAttribute(participantCalled.getAddress(), attributeName);
+			} catch (NoUserFoundException | NoAttributeFoundException
+					| ServiceNotFoundException | NoServiceProfileFoundException e) {
+				new MyEmailSender().sendErrorByEmail("Error al obtener Atributo por Service Profile");
+			}
         }
         
         return attributeValue;

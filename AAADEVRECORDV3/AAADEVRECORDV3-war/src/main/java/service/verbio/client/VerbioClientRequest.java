@@ -15,9 +15,8 @@ import javax.net.ssl.SSLContext;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.JSONObject;
 
@@ -41,12 +40,9 @@ public class VerbioClientRequest {
 				.createSSLContext(protocolTypeAssistant);
 
 		final String URI = "https://avaya:DRNUDUsWh5o3uRdQcZ@cloud2.verbio.com/asv/ws/process";
-
-		
-		  
-		  final HttpClient client = HttpClients.custom()
-		 .setSslcontext(sslContext) .setHostnameVerifier(new
-		  AllowAllHostnameVerifier()).build();
+		final HttpClient client = HttpClients.custom()
+				.setSSLContext(sslContext)
+				.setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build();
 		 
 		//final HttpClient client = new DefaultHttpClient();
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<ServiceRules name="AAADEVRECORDV3" version="1.1.0.0.0"
+<ServiceRules name="AAADEVRECORDV3" version="2.2.2.2.5"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema-instance">
 
 	<!-- Following section is needed for call related applications. Refer HelloWorld Sample service for 
